@@ -1,14 +1,16 @@
 import express  from "express";
 import dotenv from "dotenv";
 import articleRoute from "./routes/article.route.js"
+import authRoute from "./routes/user.route.js"
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
 
+app.use("/medium/api/v1/users", authRoute);
 
-app.use("/api/v1/articles", articleRoute)
+app.use("/medium/api/v1/articles", articleRoute)
 
 const PORT = process.env.PORT;
 
