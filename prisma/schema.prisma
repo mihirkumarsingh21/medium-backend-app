@@ -43,7 +43,7 @@ model Article {
 model Comment {
   id             Int          @id      @default(autoincrement())
   comments        String?
-  user_id        Int? 
+  user_id        Int?         
   user User?               @relation(fields: [user_id], references: [id])
   article_id     Int? 
   article Article?         @relation(fields: [article_id], references: [id])
