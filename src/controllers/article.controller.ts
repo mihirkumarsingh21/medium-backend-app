@@ -47,6 +47,7 @@ export const addingArticle = async (req: AuthRequest, res: Response) : Promise <
             success: false,
             message: `server error something went wrong : ${error.message}`
         })
+        return;
     }
 }
 
