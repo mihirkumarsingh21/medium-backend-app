@@ -2,7 +2,7 @@ import { Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { generateJwtTokenAndSetCookie } from "../utils/generateJwtTokenAndSetCookie.js";
-
+import { AuthRequest } from "../middlewares/auth.middleware.js";
 
 const client = new PrismaClient();
 
@@ -152,6 +152,54 @@ export const logoutUser = async (req: Request, res: Response): Promise < void > 
         return;
     } catch (error: any) {
         console.log(`error while logout user : ${error.message}`);
+        
+        res.status(500).json({
+            success: false,
+            message: `server error something went wrong : ${error.message}`
+        })
+        return;
+    }
+}
+
+export const makingAuthor = async (req: AuthRequest, res: Response): Promise < void > => {
+    try {
+        const {userId} = req.params as {
+            userId: string
+        }
+    
+        const isUserExsit = await client.user.findUnique({
+            where: {
+                id: Number(userId)
+            }
+        })
+
+        if(!isUserExsit) {
+            res.status(404).json({
+                success: false,
+                message: "user not found : user does not exsit with this id."
+            })
+            return;
+        }
+
+        const author = await client.user.update({
+            where: {
+                id: Number(userId)
+            },
+            data: {
+                role: "AUTHOR"
+            }
+        })
+
+        res.status(201).json({
+            success: true,
+            author: author
+        })
+
+        return;
+        
+
+    } catch (error: any) {
+        console.log(`error while making author ${error.message}`);
         
         res.status(500).json({
             success: false,
