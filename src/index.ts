@@ -2,11 +2,13 @@ import express  from "express";
 import dotenv from "dotenv";
 import articleRoute from "./routes/article.route.js"
 import authRoute from "./routes/user.route.js"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/medium/api/v1/users", authRoute);
 
