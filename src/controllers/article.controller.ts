@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import { AuthRequest } from "../middlewares/auth.middleware.js";
 
     const client = new PrismaClient();
 
-export const addingArticle = async (req: Request, res: Response) : Promise < void > => {
+export const addingArticle = async (req: AuthRequest, res: Response) : Promise < void > => {
     try {
 
         const { title, description, body } = req.body;
@@ -19,9 +20,9 @@ export const addingArticle = async (req: Request, res: Response) : Promise < voi
             data: {
                 title,
                 description,
-                body
+                body,
+                user: {connect: { id: Number(req.userId) }}
             }
-        
         })
 
         if(!article)  {
@@ -68,6 +69,8 @@ export const gettingSingleArticle =  async (req: Request, res: Response) : Promi
             })
             return;
         }
+
+        
 
         res.status(200).json({
             success: true,
@@ -123,6 +126,19 @@ export const updateArticle = async (req: Request, res: Response) : Promise < voi
             id: string
         }
 
+        const isArticleExsit = await client.article.findUnique({
+            where: {
+                id: Number (id)
+            }
+        })
+        if(!isArticleExsit) {
+            res.status(404).json({
+                success: false,
+                message: "not found : article does not exsit with this id."
+            })
+            return;
+        }
+
         const updatedArticle = await client.article.update({
             where: {
                 id: Number(id)
@@ -133,7 +149,7 @@ export const updateArticle = async (req: Request, res: Response) : Promise < voi
         if(!updatedArticle) {
             res.status(400).json({
                 success: false,
-                message: "failed to update article or article are not exsit with this id."
+                message: "failed to update article."
             })
             return;
         }
@@ -163,6 +179,20 @@ export const deleteArticle = async (req: Request,  res:  Response) : Promise < v
         const {id} = req.params as {
             id: string
         }
+
+        const isArticleExsit = await client.article.findUnique({
+            where: {
+                id: Number (id)
+            }
+        })
+        if(!isArticleExsit) {
+            res.status(404).json({
+                success: false,
+                message: "not found : article does not exsit with this id."
+            })
+            return;
+        }
+
         const deletedArticle = await client.article.delete({
             where: {
                 id: Number(id)
@@ -173,7 +203,7 @@ export const deleteArticle = async (req: Request,  res:  Response) : Promise < v
         if(!deletedArticle) {
             res.status(400).json({
                 success: false,
-                message: "failed to delete article or artice does not exsit with this id."
+                message: "failed to delete article."
             })
             return;
         }
