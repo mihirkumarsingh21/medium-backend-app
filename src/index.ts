@@ -4,6 +4,8 @@ import articleRoute from "./routes/article.route.js";
 import authRoute from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import commentRoute from "./routes/comment.route.js";
+import tagRoute from "./routes/tag.route.js";
+
 
 dotenv.config();
 const app = express();
@@ -15,6 +17,8 @@ app.use("/medium/api/v1/users", authRoute);
 
 app.use("/medium/api/v1/articles", articleRoute)
 app.use("/medium/api/v1/comments", commentRoute);
+app.use("/medium/api/v1/tags", tagRoute);
+
 
 const PORT = process.env.PORT;
 
