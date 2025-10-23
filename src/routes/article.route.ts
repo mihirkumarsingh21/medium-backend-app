@@ -16,5 +16,7 @@ route.get("/all", protectedRoute, gettingAllArticles);
 
 
 
+
+
 export default route;
 
