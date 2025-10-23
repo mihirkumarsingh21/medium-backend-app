@@ -93,7 +93,49 @@ export const gettingSingleArticle =  async (req: Request, res: Response) : Promi
 export const gettingAllArticles = async (req: Request, res: Response) :Promise < void > => {
     try {
 
-        const articles = await client.article.findMany();
+        const {limit, lastPostId, search} = req.query as {
+            limit: string,
+            lastPostId?: string,
+            search?: string
+        } 
+
+
+        const take = Number(limit);
+        const postId = Number(lastPostId);
+
+        if(take <= 0 || postId < 0) {
+            res.status(400).json({
+                success: false,
+                message: "take or last post id must be greater than 0"
+            })
+            return;
+        }
+
+        
+        const articles = await client.article.findMany({
+            take,
+            ...(postId && {
+                cursor: 
+                    {
+                     id: postId 
+                    }
+            }),
+            skip: postId? 1 : 0,
+            where: {
+                title: {
+                    contains: search as string,
+                    mode: "insensitive"
+                },
+                
+            },
+
+            orderBy: {
+                createdAt: "desc"
+            }
+            
+                        
+        });
+
         if(!articles) {
             res.status(404).json({
                 success: false,
@@ -102,12 +144,24 @@ export const gettingAllArticles = async (req: Request, res: Response) :Promise <
             return;
         }
 
-        res.status(200).json({
-            success: true,
-            articles: articles
-        })
+        
+       const nextCursor = articles[articles.length - 1]?.id;
 
+
+      if(articles.length === 0) {
+             res.status(404).json({
+                success: true,
+                message: "page end or article not found"
+            })
+            return;
+      } else {
+            res.status(200).json({
+            success: true,
+            articles: articles,
+            nextCursor: nextCursor 
+        })
         return;
+      }
 
     } catch (error: any) {
         console.log(`error while getting all articles : ${error.message}`);
@@ -226,6 +280,8 @@ export const deleteArticle = async (req: Request,  res:  Response) : Promise < v
         return;
     }
 }
+
+
 
 
 
