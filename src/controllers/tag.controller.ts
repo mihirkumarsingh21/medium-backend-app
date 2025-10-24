@@ -175,6 +175,46 @@ export const updateTag = async (req: AuthRequest, res: Response): Promise < void
     }
 }
 
+export const tag = async (req: AuthRequest, res: Response): Promise < void > => {
+    try {
+        const {tagId} = req.params as {
+            tagId: string
+        }
+
+        const tag = await client.tag.findUnique({
+            where: {
+                id: Number(tagId)
+            },
+            include: {
+                articles: true
+            }
+        })
+
+        if(!tag) {
+            res.status(404).json({
+                success: false,
+                message: "NOT FOUND : tag not exsit"
+            })
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            tag
+        })
+        return;
+
+    } catch (error: any) {
+        console.log(`error while getting tag ${error.message}`);
+        
+        res.status(500).json({
+            success: false,
+            message: `server error something went wrong: ${error.message}`
+        })
+        return;
+    }
+}
+
 export const deleteTag = async (req: AuthRequest, res: Response) : Promise < void > => {
     try {
         const {tagId} = req.params as {
