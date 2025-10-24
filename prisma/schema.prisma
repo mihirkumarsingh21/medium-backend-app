@@ -36,6 +36,8 @@ model Article {
   user            User     @relation(fields: [user_id], references: [id])
   comments        Comment[]
   tags            Tag[]  
+  category_id     Int? @unique
+  category        Category? @relation(fields: [category_id], references: [id])   
   published       Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -56,3 +58,11 @@ model Tag {
     name String @unique
     articles Article[] 
 }
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String @unique
+  articles Article[]
+}
+
+
