@@ -155,13 +155,19 @@ export const updateCategory = async (req: AuthRequest, res: Response) : Promise 
 export const allCategory = async (req: AuthRequest, res: Response) : Promise < void > => {
     try {
 
-    
+        const {search} = req.query as {
+            search?: string
+        }
+
         const allCategory = await client.category.findMany({
+            where:{
+                name: {
+                    contains: search as string,
+                    mode: "insensitive"
+                }
+            },
             orderBy: {
                 id: "desc",
-            },
-            include: {
-                articles: true
             }
         });
         if(!allCategory) {
@@ -190,4 +196,43 @@ export const allCategory = async (req: AuthRequest, res: Response) : Promise < v
         return;
     }
 
+}
+
+export const singleCategory = async (req: AuthRequest, res: Response) : Promise < void > => {
+    try {
+        const { categoryId } = req.params as {
+            categoryId: string
+        }
+
+        const category = await client.category.findUnique({
+            where: {
+                id: Number(categoryId),
+            },
+            include: {
+                articles: true
+            }
+        })
+
+        if(!category) {
+            res.status(404).json({
+                success: false,
+                message: "NOT FOUND : with this id there is not any category exsit Or category id are not present in your url"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            category
+        })
+        
+        
+    } catch (error: any) {
+        console.log(`error while getting single category : ${error.message}`);
+        
+        res.status(500).json({
+            success: false,
+            message: `server error something went wrong: ${error.message}`
+        })
+        return;
+    }
 }
