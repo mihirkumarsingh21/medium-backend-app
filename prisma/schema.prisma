@@ -18,6 +18,7 @@ model User {
   role           Role    @default(USER)
   articles       Article[]
   comments       Comment[]
+  reactions       Reaction[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
@@ -37,7 +38,8 @@ model Article {
   comments        Comment[]
   tags            Tag[]  
   category_id     Int? @unique
-  category        Category? @relation(fields: [category_id], references: [id])   
+  category        Category? @relation(fields: [category_id], references: [id])  
+  reactions        Reaction[] 
   published       Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -65,4 +67,17 @@ model Category {
   articles Article[]
 }
 
+model Reaction {
+  id Int @default(autoincrement())
+  user_id Int @unique
+  user User @relation(fields: [user_id], references: [id])
+  article_id Int @unique
+  article Article @relation(fields: [article_id], references: [id])
+  type  ReactionType 
+  @@unique([user_id, article_id])
+}
 
+enum ReactionType {
+  LIKE
+  DISLIKE
+}
