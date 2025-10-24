@@ -60,6 +60,10 @@ export const gettingSingleArticle =  async (req: Request, res: Response) : Promi
         const singleArticle = await client.article.findUnique({
             where: {
                 id: Number(id)
+            },
+            include: {
+                comments: true,
+                tags: true
             }
         })
 
@@ -123,8 +127,10 @@ export const gettingAllArticles = async (req: Request, res: Response) :Promise <
             skip: postId? 1 : 0,
             where: {
                 title: {
+
                     contains: search as string,
                     mode: "insensitive"
+                    
                 },
                 
             },
