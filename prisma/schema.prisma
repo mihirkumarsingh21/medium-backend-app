@@ -68,12 +68,14 @@ model Category {
 }
 
 model Reaction {
-  id Int @default(autoincrement())
-  user_id Int 
-  user User @relation(fields: [user_id], references: [id])
-  article_id Int 
-  article Article @relation(fields: [article_id], references: [id])
-  type  ReactionType 
+  id               Int                @id @default(autoincrement())
+  user_id          Int?
+  user User?                            @relation(fields: [user_id], references: [id])
+  article_id       Int 
+  article Article                      @relation(fields: [article_id], references: [id])
+  type  ReactionType                   @default(DISLIKE)
+  like             Int                 @default(0)
+  dislike          Int                 @default(0)
   @@unique([user_id, article_id])
 }
 
