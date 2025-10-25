@@ -5,6 +5,6 @@ import { addLike, getTotalLikeDislike } from "../controllers/like.controller.js"
 const route = express.Router();
 
 route.post("/article/:articleId/like", protectedRoute, addLike);
-route.get("/articles/:id/reactions", protectedRoute, getTotalLikeDislike);
+route.get("/articles/:articleId/reactions", protectedRoute, getTotalLikeDislike);
 
 export default route;
