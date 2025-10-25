@@ -108,6 +108,37 @@ export const addLike = async (req: AuthRequest, res: Response): Promise < void >
 
 export const getTotalLikeDislike = async (req: AuthRequest, res: Response): Promise < void > => {
     try {
+        const {articleId} = req.params;
+
+        const totalLike = await client.reaction.count({
+            where: {
+                article_id: Number(articleId),
+                type: "LIKE"
+            }
+        })
+
+        const totalDislike = await client.reaction.count({
+            where: {
+                article_id: Number(articleId),
+                type: "DISLIKE"
+            }
+        })
+
+        if(!totalLike || !totalDislike) {
+            res.status(404).json({
+                success: false,
+                message: "failed to get total like or dislike count."
+            })
+            return;
+        }
+       
+        res.status(200).json({
+            success: true,
+            totalLikes: totalLike,
+            totalDislikes: totalDislike
+        })
+        return;
+
         
     } catch (error: any) {
         console.log(`error while getting total like & dislike :${error.message}`);
