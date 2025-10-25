@@ -6,6 +6,9 @@ import cookieParser from "cookie-parser";
 import commentRoute from "./routes/comment.route.js";
 import tagRoute from "./routes/tag.route.js";
 import categoryRoute from "./routes/category.route.js";
+import likeRoute from "./routes/like.route.js";
+
+
 
 dotenv.config();
 const app = express();
@@ -19,6 +22,8 @@ app.use("/medium/api/v1/articles", articleRoute)
 app.use("/medium/api/v1/comments", commentRoute);
 app.use("/medium/api/v1/tags", tagRoute);
 app.use("/medium/api/v1/category", categoryRoute);
+app.use("/medium/api/v1/likes", likeRoute);
+
 
 
 
