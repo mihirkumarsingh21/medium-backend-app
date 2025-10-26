@@ -106,41 +106,49 @@ This project was created to **learn backend development** and practice **Postgre
 
 ---
 
-## 🖼️ Screenshots / Proof of Functionality
+## 🖼️ Screenshots 
 
 Here are some screenshots showing the backend in action:
 
+### 📁 Project structure
+
+<img width="1366" height="768" alt="Screenshot 2025-10-26 064645" src="https://github.com/user-attachments/assets/2efa5df3-d869-46c2-9671-aad2e022d469" />
+<img width="1366" height="768" alt="Screenshot 2025-10-26 064738" src="https://github.com/user-attachments/assets/747cbb05-44c9-448b-8c7b-91bcd7a7d68b" />
+
+
 ### 1️⃣ User Authentication
 - Register / Login / Logout
-![Register Screenshot](./screenshots/register.png)
-![Login Screenshot](./screenshots/login.png)
+<img width="1366" height="768" alt="Screenshot 2025-10-26 065221" src="https://github.com/user-attachments/assets/1e25c141-6155-4b0f-b79b-5a29e2575e52" />
+<img width="1366" height="768" alt="Screenshot 2025-10-26 065227" src="https://github.com/user-attachments/assets/f6d53109-98b9-4553-998f-3b2af0fdf369" />
 
 ---
 
 ### 2️⃣ Articles CRUD
 - Create, Read, Update, Delete Articles
-![Add Article](./screenshots/add-article.png)
-![Get All Articles](./screenshots/get-all-articles.png)
+<img width="1366" height="720" alt="Screenshot 2025-10-26 065520" src="https://github.com/user-attachments/assets/8b80003a-742d-4840-991c-633d20f3b7d4" />
+<img width="1366" height="720" alt="Screenshot 2025-10-26 065546" src="https://github.com/user-attachments/assets/281bff5b-2d93-4c08-97db-c381b5825c11" />
 
 ---
 
 ### 3️⃣ Categories & Tags
 - Add / Update / Delete Categories & Tags
-![Add Category](./screenshots/add-category.png)
-![Add Tag](./screenshots/add-tag.png)
+<img width="1366" height="720" alt="Screenshot 2025-10-26 065808" src="https://github.com/user-attachments/assets/280be451-05dd-42d2-b61f-f8329f18396e" />
+<img width="1366" height="720" alt="Screenshot 2025-10-26 065737" src="https://github.com/user-attachments/assets/789c3593-b9a1-4ff0-922d-353c43d302da" />
 
 ---
 
 ### 4️⃣ Comments
 - Add, Update, Delete Comments
-![Add Comment](./screenshots/add-comment.png)
+<img width="1366" height="720" alt="Screenshot 2025-10-26 070155" src="https://github.com/user-attachments/assets/48a9ce46-eb1e-4bae-9ca5-de2b595976bc" />
+
+<img width="1366" height="720" alt="Screenshot 2025-10-26 065932" src="https://github.com/user-attachments/assets/b2d205ec-d4c1-4bde-b9e2-04ba35eb1df7" />
 
 ---
 
 ### 5️⃣ Reactions (Like / Dislike)
 - Toggle Logic, Total Count
-![Add Like](./screenshots/add-like.png)
-![Get Reactions](./screenshots/get-reactions.png)
+<img width="1366" height="720" alt="Screenshot 2025-10-26 070414" src="https://github.com/user-attachments/assets/3f03beef-8881-4ae6-88e1-c37ae27691a8" />
+<img width="1366" height="720" alt="Screenshot 2025-10-26 070433" src="https://github.com/user-attachments/assets/76c039d7-f7a0-46c2-8255-b8c4bfc3c742" />
 
 ---
 
