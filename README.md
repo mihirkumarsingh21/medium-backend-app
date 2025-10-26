@@ -156,4 +156,4 @@ Here are some screenshots showing the backend in action:
 
 1. **Clone the repository**
 ```bash
-git clone <repo-url>
+https://github.com/mihirkumarsingh21/medium-backend-app.git
