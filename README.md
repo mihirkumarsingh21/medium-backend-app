@@ -152,6 +152,23 @@ Here are some screenshots showing the backend in action:
 
 ---
 
+## 🗄️ Database Setup (PostgreSQL + Prisma)
+
+This project uses **PostgreSQL** as the database and **Prisma ORM** for schema and migration management.
+
+### Prisma Schema
+<img width="1366" height="720" alt="Screenshot 2025-10-26 072402" src="https://github.com/user-attachments/assets/9dc9964d-5993-4386-90eb-7af1ef7acf09" />
+
+
+### Tables in PostgreSQL
+<img width="1366" height="768" alt="Screenshot 2025-10-26 072005" src="https://github.com/user-attachments/assets/26a5ba73-34dc-4854-9ffb-beb6aeef720d" />
+
+### Migration management
+<img width="1366" height="768" alt="Screenshot 2025-10-26 072759" src="https://github.com/user-attachments/assets/c25d8fa9-7591-4537-85d0-db6be415efff" />
+
+
+---
+
 ## ⚙️ Usage
 
 1. **Clone the repository**
