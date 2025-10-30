@@ -16,7 +16,7 @@ model User {
   email          String  @unique
   password       String
   role           Role    @default(USER)
-  articles       Article[]
+  articles       Article[] 
   comments       Comment[]
   reactions       Reaction[]
   followers      Follow[] @relation("UserFollowers")
@@ -91,13 +91,24 @@ model Follow {
   id            Int  @id @default(autoincrement())
 
   follower_id   Int
-  follower      User @relation("UserFollowing", fields: [follower_id], references: [id])
+  follower      User @relation("UserFollowers", fields: [follower_id], references: [id])
+  followerCount Int? @default(0)
 
-  following_id  Int
-  following     User @relation("UserFollowers", fields: [following_id], references: [id])
+  type          FollowType @default(UNFOLLOW)
+
+  following_id  Int?
+  following     User? @relation("UserFollowing", fields: [following_id], references: [id])
+  followingCount Int? @default(0)
 
   createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@unique([follower_id, following_id])
+}
+
+
+enum FollowType {
+  FOLLOW 
+  UNFOLLOW
 }
 
