@@ -81,7 +81,7 @@ export const addLike = async (req: AuthRequest, res: Response): Promise < void >
             await client.reaction.delete({
                 where: {
                     user_id_article_id: {
-                        user_id: isArticleAlreadyLike.user_id,
+                        user_id: isArticleAlreadyLike.user_id as any,
                         article_id: isArticleAlreadyLike.article_id
                     }
                 }
