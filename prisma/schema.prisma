@@ -19,6 +19,8 @@ model User {
   articles       Article[]
   comments       Comment[]
   reactions       Reaction[]
+  followers      Follow[] @relation("UserFollowers")
+  following      Follow[] @relation("UserFollowing")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
@@ -83,3 +85,19 @@ enum ReactionType {
   LIKE
   DISLIKE
 }
+
+
+model Follow {
+  id            Int  @id @default(autoincrement())
+
+  follower_id   Int
+  follower      User @relation("UserFollowing", fields: [follower_id], references: [id])
+
+  following_id  Int
+  following     User @relation("UserFollowers", fields: [following_id], references: [id])
+
+  createdAt     DateTime @default(now())
+
+  @@unique([follower_id, following_id])
+}
+
