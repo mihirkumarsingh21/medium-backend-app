@@ -8,6 +8,7 @@ import tagRoute from "./routes/tag.route.js";
 import categoryRoute from "./routes/category.route.js";
 import likeRoute from "./routes/like.route.js";
 import followRoute from "./routes/follow.route.js";
+import authorRoute from "./routes/author.route.js";
 
 
 
@@ -25,6 +26,8 @@ app.use("/medium/api/v1/tags", tagRoute);
 app.use("/medium/api/v1/category", categoryRoute);
 app.use("/medium/api/v1/likes", likeRoute);
 app.use("/medium/api/v1/follows", followRoute);
+app.use("/medium/api/v1/author", authorRoute);
+
 
 
 
