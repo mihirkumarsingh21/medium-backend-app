@@ -16,14 +16,24 @@ model User {
   email          String  @unique
   password       String
   role           Role    @default(USER)
+  author         Author?  
   articles       Article[] 
   comments       Comment[]
   reactions       Reaction[]
   followers      Follow[] @relation("UserFollowers")
   following      Follow[] @relation("UserFollowing")
+  followerCount    Int @default(0)
+  followingCount   Int @default(0)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model Author {
+  id           Int @id @default(autoincrement())
+  user_id      Int @unique
+  user         User @relation(fields: [user_id], references: [id])
+  bio          String
+  }
 
 enum Role {
   USER
@@ -94,11 +104,8 @@ model Follow {
   follower      User @relation("UserFollowers", fields: [follower_id], references: [id])
   followerCount Int? @default(0)
 
-  type          FollowType @default(UNFOLLOW)
-
   following_id  Int?
   following     User? @relation("UserFollowing", fields: [following_id], references: [id])
-  followingCount Int? @default(0)
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -107,8 +114,5 @@ model Follow {
 }
 
 
-enum FollowType {
-  FOLLOW 
-  UNFOLLOW
-}
+
 
