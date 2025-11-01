@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx -b tsc && node ./dist/index.js"
+    "dev": "tsc && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
