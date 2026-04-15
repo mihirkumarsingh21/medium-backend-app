@@ -152,7 +152,7 @@ Here are some screenshots showing the backend in action:
 
 ---
 
-## 🗄️ Database Setup (PostgreSQL + Prisma)
+## 🗄️ Database Setup ( PostgreSQL + Prisma ORM)
 
 This project uses **PostgreSQL** as the database and **Prisma ORM** for schema and migration management.
 
